@@ -1,0 +1,1044 @@
+  [1m[35m (445.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (512.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3109729866333505485);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateRobots (20201105152025)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (386.7ms)[0m  [1m[35mCREATE TABLE "robots" ("id" serial primary key, "x_position" integer, "y_position" integer, "max_x" integer, "max_y" integer, "facing" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201105152025"]]
+  [1m[35m (38.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-11-05 15:23:17.233114"], ["updated_at", "2020-11-05 15:23:17.233114"]]
+  [1m[35m (44.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(3109729866333505485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."max_x" = $1 AND "robots"."max_y" = $2 LIMIT $3[0m  [["max_x", 10], ["max_y", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "robots" ("max_x", "max_y", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["max_x", 10], ["max_y", 10], ["created_at", "2020-11-05 15:26:10.544669"], ["updated_at", "2020-11-05 15:26:10.544669"]]
+  [1m[35m (62.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" ORDER BY "robots"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/" for ::1 at 2020-11-05 21:02:13 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /home/amal/.rvm/gems/ruby-2.4.1/gems/railties-5.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/amal/.rvm/gems/ruby-2.4.1/gems/railties-5.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (99.7ms)
+Completed 200 OK in 521ms (Views: 288.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/robots" for ::1 at 2020-11-05 21:06:10 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/robots"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robotos" for ::1 at 2020-11-05 21:07:51 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/api/robotos"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robots" for ::1 at 2020-11-05 21:07:52 +0530
+  
+LoadError (Unable to autoload constant Api::RobotsController, expected /home/amal/robo/app/controllers/api/robots_controller.rb to define it):
+  
+activesupport (5.0.7.2) lib/active_support/dependencies.rb:513:in `load_missing_constant'
+activesupport (5.0.7.2) lib/active_support/dependencies.rb:203:in `const_missing'
+activesupport (5.0.7.2) lib/active_support/inflector/methods.rb:270:in `const_get'
+activesupport (5.0.7.2) lib/active_support/inflector/methods.rb:270:in `block in constantize'
+activesupport (5.0.7.2) lib/active_support/inflector/methods.rb:266:in `each'
+activesupport (5.0.7.2) lib/active_support/inflector/methods.rb:266:in `inject'
+activesupport (5.0.7.2) lib/active_support/inflector/methods.rb:266:in `constantize'
+activesupport (5.0.7.2) lib/active_support/dependencies.rb:584:in `get'
+activesupport (5.0.7.2) lib/active_support/dependencies.rb:615:in `constantize'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:30:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.7.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robots" for ::1 at 2020-11-05 21:08:31 +0530
+Processing by Api::RobotsController#index as */*
+  [1m[36mRobot Load (0.4ms)[0m  [1m[34mSELECT "robots".* FROM "robots"[0m
+Completed 200 OK in 12ms (Views: 6.6ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/api/robots/0/orders" for ::1 at 2020-11-05 21:10:29 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/api/robots/0/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robots/1/orders" for ::1 at 2020-11-05 21:10:36 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/api/robots/1/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/dada" for ::1 at 2020-11-05 21:10:48 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/dada"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robots/1/orders" for ::1 at 2020-11-05 21:11:46 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [GET] "/api/robots/1/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robots/1/orders" for ::1 at 2020-11-05 21:12:16 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [GET] "/api/robots/1/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robot/1/orders" for ::1 at 2020-11-05 21:12:25 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/api/robot/1/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/robot/1/orders" for ::1 at 2020-11-05 21:12:49 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [GET] "/api/robot/1/orders"):
+  
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:13:31 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"id"=>"1"}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:15:26 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+ commands: ['PLACE 0,0,NORTH','MOVE']
+}
+  
+ActionDispatch::ParamsParser::ParseError (743: unexpected token at '{
+ commands: ['PLACE 0,0,NORTH','MOVE']
+}'):
+  
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch_header'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.7.2) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.7.2) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.7.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:15:42 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    commands: ['PLACE 0,0,NORTH','MOVE']
+}
+  
+ActionDispatch::ParamsParser::ParseError (743: unexpected token at '{
+    commands: ['PLACE 0,0,NORTH','MOVE']
+}'):
+  
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch_header'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.7.2) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.7.2) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.7.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:15:44 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    commands: ['PLACE 0,0,NORTH','MOVE']
+}
+  
+ActionDispatch::ParamsParser::ParseError (743: unexpected token at '{
+    commands: ['PLACE 0,0,NORTH','MOVE']
+}'):
+  
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch'
+rack (2.2.3) lib/rack/request.rb:69:in `fetch_header'
+actionpack (5.0.7.2) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.7.2) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.7.2) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.7.2) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.7.2) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.7.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.7.2) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.7.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.7.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.7.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.7.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.7.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.7.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.7.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.0.7.2) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:17:00 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+Completed 204 No Content in 0ms (ActiveRecord: 2.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:17:11 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+Completed 204 No Content in 317350ms (ActiveRecord: 2.5ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:22:32 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["NEW 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:22:56 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:23:19 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+Completed 204 No Content in 683356ms (ActiveRecord: 1.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:35:26 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (1.0ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 0], ["y_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:23:48.726907"], ["id", 1]]
+  [1m[35m (34.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 1102089ms (ActiveRecord: 38.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:54:35 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.4ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.7ms)
+
+
+  
+NoMethodError (undefined method `execute_commands' for #<Class:0x00556d2dd6ca78>):
+  
+app/controllers/api/robots_controller.rb:35:in `orders'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:54:52 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.4ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `each' for "PLACE 0,0,NORTH":String):
+  
+app/models/robot.rb:9:in `execute_commands'
+app/controllers/api/robots_controller.rb:35:in `orders'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:55:24 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `shift' for "PLACE 0,0,NORTH":String):
+  
+app/controllers/api/robots_controller.rb:35:in `orders'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:56:15 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 1], ["facing", nil], ["updated_at", "2020-11-05 16:26:15.873364"], ["id", 1]]
+  [1m[35m (60.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 70ms (ActiveRecord: 62.1ms)
+
+
+  [1m[36mRobot Load (1.0ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" ORDER BY "robots"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:57:01 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:27:01.657288"], ["id", 1]]
+  [1m[35m (105.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 1], ["facing", nil], ["updated_at", "2020-11-05 16:27:24.709923"], ["id", 1]]
+  [1m[35m (46.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 23112ms (ActiveRecord: 154.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:57:52 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:28:38.759163"], ["id", 1]]
+  [1m[35m (39.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 1], ["facing", nil], ["updated_at", "2020-11-05 16:28:40.240359"], ["id", 1]]
+  [1m[35m (26.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 47767ms (ActiveRecord: 68.2ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 21:58:43 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["y_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:28:49.100520"], ["id", 1]]
+  [1m[35m (40.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:28:52.970977"], ["id", 1]]
+  [1m[35m (42.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 9167ms (ActiveRecord: 86.4ms)
+
+
+  [1m[36mRobot Load (1.0ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" ORDER BY "robots"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:02:29 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 16:32:29.297925"], ["id", 1]]
+  [1m[35m (68.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:32:29.368999"], ["id", 1]]
+  [1m[35m (157.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 204 No Content in 9252ms (ActiveRecord: 227.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:02:50 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.5ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 16:32:50.226996"], ["id", 1]]
+  [1m[35m (57.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:32:50.286409"], ["id", 1]]
+  [1m[35m (154.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 11383ms (ActiveRecord: 213.2ms)
+
+
+  
+NoMethodError (undefined method `x' for #<Robot:0x00556d2e477b10>):
+  
+app/controllers/api/robots_controller.rb:38:in `orders'
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:03:27 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 16:33:27.429423"], ["id", 1]]
+  [1m[35m (47.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:33:27.478832"], ["id", 1]]
+  [1m[35m (135.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 197ms (Views: 0.5ms | ActiveRecord: 188.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:05:50 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 1], ["y_position", 2], ["facing", "EAST"], ["updated_at", "2020-11-05 16:35:50.031516"], ["id", 1]]
+  [1m[35m (68.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:35:50.103477"], ["id", 1]]
+  [1m[35m (117.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 200ms (Views: 0.8ms | ActiveRecord: 187.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:06:23 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.4ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["facing", "EAST"], ["updated_at", "2020-11-05 16:36:23.643732"], ["id", 1]]
+  [1m[35m (60.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:39:33.908571"], ["id", 1]]
+  [1m[35m (78.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 190353ms (Views: 0.2ms | ActiveRecord: 140.1ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:09:37 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.4ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["facing", "EAST"], ["updated_at", "2020-11-05 16:39:37.551372"], ["id", 1]]
+  [1m[35m (122.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 8], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:39:42.688032"], ["id", 1]]
+  [1m[35m (25.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 5176ms (Views: 0.5ms | ActiveRecord: 150.7ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:10:11 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["facing", "EAST"], ["updated_at", "2020-11-05 16:40:11.128797"], ["id", 1]]
+  [1m[35m (134.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 8], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:42:31.995708"], ["id", 1]]
+  [1m[35m (42.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 140916ms (Views: 0.4ms | ActiveRecord: 179.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:12:35 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["facing", "EAST"], ["updated_at", "2020-11-05 16:42:35.162999"], ["id", 1]]
+  [1m[35m (142.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 4], ["y_position", 4], ["updated_at", "2020-11-05 16:44:22.243675"], ["id", 1]]
+  [1m[35m (38.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 107133ms (Views: 0.7ms | ActiveRecord: 185.4ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:14:51 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["y_position", 2], ["updated_at", "2020-11-05 16:44:51.964909"], ["id", 1]]
+  [1m[35m (135.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 4], ["y_position", 4], ["updated_at", "2020-11-05 16:46:37.843153"], ["id", 1]]
+  [1m[35m (41.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 105923ms (Views: 0.1ms | ActiveRecord: 178.8ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:16:42 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["y_position", 2], ["updated_at", "2020-11-05 16:46:42.733961"], ["id", 1]]
+  [1m[35m (55.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 3], ["y_position", 3], ["updated_at", "2020-11-05 16:46:45.055409"], ["id", 1]]
+  [1m[35m (139.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 2472ms (Views: 0.3ms | ActiveRecord: 199.8ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:17:03 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["y_position", 2], ["updated_at", "2020-11-05 16:47:03.867868"], ["id", 1]]
+  [1m[35m (86.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 3], ["y_position", 3], ["updated_at", "2020-11-05 16:48:48.526619"], ["id", 1]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 104701ms (Views: 0.1ms | ActiveRecord: 127.1ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:18:54 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 1], ["y_position", 2], ["updated_at", "2020-11-05 16:48:54.791561"], ["id", 1]]
+  [1m[35m (56.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 3], ["y_position", 3], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:49:02.371466"], ["id", 1]]
+  [1m[35m (37.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 7629ms (Views: 0.2ms | ActiveRecord: 100.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:19:25 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,NORT", "LEFT", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 1], ["y_position", 2], ["facing", "NORT"], ["updated_at", "2020-11-05 16:49:25.477165"], ["id", 1]]
+  [1m[35m (48.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 65ms (Views: 0.3ms | ActiveRecord: 49.7ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:19:50 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,NORTH", "LEFT", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "NORTH"], ["updated_at", "2020-11-05 16:49:50.670190"], ["id", 1]]
+  [1m[35m (99.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "WEST"], ["updated_at", "2020-11-05 16:49:50.775543"], ["id", 1]]
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 147ms (Views: 2.6ms | ActiveRecord: 134.4ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:20:02 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 0], ["y_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:50:02.147270"], ["id", 1]]
+  [1m[35m (87.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "WEST"], ["updated_at", "2020-11-05 16:50:02.238775"], ["id", 1]]
+  [1m[35m (90.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 186ms (Views: 0.3ms | ActiveRecord: 179.7ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:20:34 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "NORTH"], ["updated_at", "2020-11-05 16:50:34.670541"], ["id", 1]]
+  [1m[35m (93.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:50:34.768413"], ["id", 1]]
+  [1m[35m (32.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 139ms (Views: 0.4ms | ActiveRecord: 128.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:20:55 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["d 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 400 Bad Request in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:21:28 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 16:51:28.697575"], ["id", 1]]
+  [1m[35m (97.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", -1], ["facing", "WEST"], ["updated_at", "2020-11-05 16:51:28.798899"], ["id", 1]]
+  [1m[35m (35.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 146ms (Views: 0.3ms | ActiveRecord: 135.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:21:49 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:51:49.844014"], ["id", 1]]
+  [1m[35m (58.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", -1], ["facing", "WEST"], ["updated_at", "2020-11-05 16:52:33.233819"], ["id", 1]]
+  [1m[35m (39.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 43441ms (Views: 0.4ms | ActiveRecord: 103.5ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:22:55 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:52:55.281138"], ["id", 1]]
+  [1m[35m (72.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", -1], ["facing", "WEST"], ["updated_at", "2020-11-05 16:52:55.356041"], ["id", 1]]
+  [1m[35m (109.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 194ms (Views: 0.6ms | ActiveRecord: 183.5ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:23:15 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:53:16.005946"], ["id", 1]]
+  [1m[35m (77.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", -1], ["facing", "WEST"], ["updated_at", "2020-11-05 16:53:30.193619"], ["id", 1]]
+  [1m[35m (39.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 14239ms (Views: 0.3ms | ActiveRecord: 120.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:23:59 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.6ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "facing" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:53:59.380515"], ["id", 1]]
+  [1m[35m (55.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 400 Bad Request in 67ms (Views: 0.2ms | ActiveRecord: 56.9ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:24:28 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 400 Bad Request in 6ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:24:46 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 16:54:46.655808"], ["id", 1]]
+  [1m[35m (89.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 96ms (Views: 0.7ms | ActiveRecord: 90.8ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:24:55 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 16:54:55.929077"], ["id", 1]]
+  [1m[35m (94.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "WEST"], ["updated_at", "2020-11-05 16:54:56.028164"], ["id", 1]]
+  [1m[35m (35.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 141ms (Views: 0.2ms | ActiveRecord: 132.7ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:25:47 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 1], ["y_position", 2], ["facing", "EAST"], ["updated_at", "2020-11-05 16:55:47.671246"], ["id", 1]]
+  [1m[35m (86.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 3], ["y_position", 3], ["facing", "NORTH"], ["updated_at", "2020-11-05 16:55:47.759197"], ["id", 1]]
+  [1m[35m (36.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 128ms (Views: 0.1ms | ActiveRecord: 124.0ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:52:07 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 9,9,NORTH", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 9], ["y_position", 9], ["updated_at", "2020-11-05 17:22:07.889195"], ["id", 1]]
+  [1m[35m (40.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 400 Bad Request in 53ms (Views: 0.1ms | ActiveRecord: 44.3ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:52:55 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 9,9,NORTH", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.5ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 400 Bad Request in 8ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:53:42 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE -1,0,NORTH", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.7ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", -1], ["y_position", 0], ["updated_at", "2020-11-05 17:23:42.863773"], ["id", 1]]
+  [1m[35m (75.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 400 Bad Request in 82ms (Views: 0.6ms | ActiveRecord: 76.7ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:53:56 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE -1,0,NORTH", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 400 Bad Request in 18ms (Views: 0.4ms | ActiveRecord: 3.9ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 22:54:34 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 1], ["y_position", 2], ["facing", "EAST"], ["updated_at", "2020-11-05 17:24:34.062643"], ["id", 1]]
+  [1m[35m (83.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 3], ["y_position", 3], ["facing", "NORTH"], ["updated_at", "2020-11-05 17:24:34.151212"], ["id", 1]]
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 130ms (Views: 0.5ms | ActiveRecord: 118.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 23:00:54 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 1], ["y_position", 2], ["facing", "EAST"], ["updated_at", "2020-11-05 17:30:54.299835"], ["id", 1]]
+  [1m[35m (51.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "facing" = $3, "updated_at" = $4 WHERE "robots"."id" = $5[0m  [["x_position", 3], ["y_position", 3], ["facing", "NORTH"], ["updated_at", "2020-11-05 17:30:54.355116"], ["id", 1]]
+  [1m[35m (124.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 191ms (Views: 0.5ms | ActiveRecord: 180.6ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 23:01:23 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "MOVE", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.3ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "x_position" = $1, "y_position" = $2, "updated_at" = $3 WHERE "robots"."id" = $4[0m  [["x_position", 0], ["y_position", 0], ["updated_at", "2020-11-05 17:31:23.725248"], ["id", 1]]
+  [1m[35m (59.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 1], ["updated_at", "2020-11-05 17:31:23.786850"], ["id", 1]]
+  [1m[35m (123.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 192ms (Views: 0.4ms | ActiveRecord: 184.1ms)
+
+
+Started POST "/api/robot/1/orders" for ::1 at 2020-11-05 23:01:48 +0530
+Processing by Api::RobotsController#orders as */*
+  Parameters: {"commands"=>["PLACE 0,0,NORTH", "LEFT", "REPORT"], "id"=>"1", "robot"=>{}}
+  [1m[36mRobot Load (0.2ms)[0m  [1m[34mSELECT  "robots".* FROM "robots" WHERE "robots"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "robots" SET "y_position" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["y_position", 0], ["updated_at", "2020-11-05 17:31:48.456444"], ["id", 1]]
+  [1m[35m (100.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "robots" SET "facing" = $1, "updated_at" = $2 WHERE "robots"."id" = $3[0m  [["facing", "WEST"], ["updated_at", "2020-11-05 17:31:48.559461"], ["id", 1]]
+  [1m[35m (35.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 143ms (Views: 0.3ms | ActiveRecord: 138.0ms)
+
+
